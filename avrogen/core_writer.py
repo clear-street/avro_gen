@@ -45,7 +45,7 @@ def convert_default(full_name, idx, do_json=True):
         return f'SCHEMA.field_map["{idx}"].default'
 
 
-def write_defaults(record, writer, my_full_name=None, use_logical_types=False):
+def write_defaults(record, writer, my_full_name=None, use_logical_types=False, init=False):
     """
     Write concrete record class's constructor part which initializes fields with default values
     :param schema.RecordSchema record: Avro RecordSchema whose class we are generating
@@ -114,6 +114,12 @@ def write_defaults(record, writer, my_full_name=None, use_logical_types=False):
     if not something_written:
         writer.write('\npass')
 
+def write_setters(record, writer, use_logical_types=False):
+    for field in record.fields:
+        f_name = field.name
+        if keyword.iskeyword(field.name):
+            f_name =  field.name + get_field_type_name(field.type, use_logical_types)
+        writer.write(f'\nself.{f_name} = inner_dict["{f_name}"]')
 
 def write_fields(record, writer, use_logical_types):
     """
@@ -373,6 +379,9 @@ def write_schema_record(record, writer, use_logical_types):
             writer.write('\nif inner_dict is None:')
             with writer.indent():
                 write_defaults(record, writer, use_logical_types=use_logical_types)
+            writer.write('\nelse:')
+            with writer.indent():
+                write_setters(record, writer)
         write_fields(record, writer, use_logical_types)
 
 
