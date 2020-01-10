@@ -18,7 +18,7 @@ if six.PY3:
             return self._inner_dict.__len__()
 
         def __setitem__(self, key, value):
-            raise NotImplementedError()
+            self._inner_dict[key] = value
 
         def items(self):
             return self._inner_dict.items()
