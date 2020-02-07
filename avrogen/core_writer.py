@@ -127,8 +127,8 @@ def write_setters(record, writer, use_logical_types=False):
         writer.write(f'"{f_name}", ')
     writer.write(']\n')
 
-    writer.write('if set(field_names) - set(inner_dict.keys()):\n')
-    writer.write('    err = set(field_names) - set(inner_dict.keys())\n')
+    writer.write('if set(inner_dict.keys()) - set(field_names):\n')
+    writer.write('    err = set(inner_dict.keys()) - set(field_names)\n')
     writer.write('    raise KeyError(f"Keys from provided object are not subset of object params in {type(self).__name__}: {err}")\n')
 
     for field in record.fields:
