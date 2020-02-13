@@ -134,7 +134,7 @@ def write_setters(record, writer, use_logical_types=False):
         writer.write(f'self.{f_name} = inner_dict.get("{f_name}")\n')
     
     writer.write(f'if all([item is None for item in self.values()]):\n')
-    writer.write('    raise ValueError(f"All incoming fields for class {f_name} are set to None")')
+    writer.write(f'    raise ValueError("All incoming fields for class {f_name} are set to None")')
 
 def write_fields(record, writer, use_logical_types):
     """
