@@ -119,14 +119,6 @@ def write_defaults(record, writer, my_full_name=None, use_logical_types=False, i
         writer.write('\npass')
 
 def write_setters(record, writer, use_logical_types=False):
-    writer.write('\nfield_names = [')
-    for field in record.fields:
-        f_name = field.name
-        if keyword.iskeyword(field.name):
-            f_name =  field.name + get_field_type_name(field.type, use_logical_types)
-        writer.write(f'"{f_name}", ')
-    writer.write(']\n')
-
     for field in record.fields:
         f_name = field.name
         if keyword.iskeyword(field.name):
@@ -134,7 +126,7 @@ def write_setters(record, writer, use_logical_types=False):
         writer.write(f'self.{f_name} = inner_dict.get("{f_name}")\n')
     
     writer.write(f'if all([item is None for item in self.values()]):\n')
-    writer.write(f'    raise ValueError("All incoming fields for class {f_name} are set to None")')
+    writer.write('    raise ValueError("All incoming fields for class {type(self).__name__} are set to None")')
 
 def write_fields(record, writer, use_logical_types):
     """
