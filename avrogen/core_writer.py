@@ -119,6 +119,7 @@ def write_defaults(record, writer, my_full_name=None, use_logical_types=False, i
         writer.write('\npass')
 
 def write_setters(record, writer, use_logical_types=False):
+    writer.write('\n')
     for field in record.fields:
         f_name = field.name
         if keyword.iskeyword(field.name):
