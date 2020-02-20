@@ -79,7 +79,7 @@ def generate_schema(schema_json, use_logical_types=False, custom_imports=None, a
 
     for name, field_schema in names:
         n = clean_fullname(field_schema.namespace + '-' + field_schema.name)
-        writer.write(f"\n'{n}': {field_schema.name}Class")
+        writer.write(f"\n'{n}': {field_schema.name}Class,")
 
     writer.untab()
     writer.write('\n}\n\n')
