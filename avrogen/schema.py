@@ -74,7 +74,7 @@ def generate_schema(schema_json, use_logical_types=False, custom_imports=None, a
     writer.write('\n}\n\n')
 
     writer.set_tab(0)
-    writer.write('\n\nIDENTIFIER_TO_CLASS = {')
+    writer.write('\nIDENTIFIER_TO_CLASS = {')
     writer.tab()
 
     for name, field_schema in names:
