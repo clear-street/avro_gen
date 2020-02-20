@@ -150,6 +150,7 @@ def write_specific_reader(record_types, output_folder, use_logical_types):
         writer.write('from .schema_classes import SCHEMA as get_schema_type')
         for t in record_types:
             writer.write(f'\nfrom .schema_classes import {t.split(".")[-1]}Class')
+            writer.write(f'\nfrom .schema_classes import *')
         writer.write('\nfrom avro.io import DatumReader')
         if use_logical_types:
             writer.write('\nfrom avrogen import logical')
