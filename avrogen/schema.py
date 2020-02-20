@@ -73,16 +73,7 @@ def generate_schema(schema_json, use_logical_types=False, custom_imports=None, a
     writer.untab()
     writer.write('\n}\n\n')
 
-    writer.set_tab(0)
-    writer.write('\nIDENTIFIER_TO_CLASS = {')
-    writer.tab()
 
-    for name, field_schema in names:
-        n = clean_fullname(field_schema.namespace + '-' + field_schema.name)
-        writer.write(f"\n'{n}': {field_schema.name}Class,")
-
-    writer.untab()
-    writer.write('\n}\n\n')
 
     writer.write(f'_json_converter = {avro_json_converter}\n\n')
 

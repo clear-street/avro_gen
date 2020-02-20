@@ -65,6 +65,7 @@ def generate_protocol(protocol_json, use_logical_types=False, custom_imports=Non
 
     for message, request, response in messages:
         fullname = ns_.make_fullname(proto.namespace, clean_fullname(message.name))
+        print(f"THE FULL NAME IS {fullname}")
         ns, name = ns_.split_fullname(fullname)
         if ns not in namespaces:
             namespaces[ns] = {'requests': [], 'records': [], 'responses': []}

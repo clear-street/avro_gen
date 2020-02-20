@@ -372,6 +372,7 @@ def generate_namespace_modules(names, output_folder):
         if not ns in ns_dict:
             ns_dict[ns] = []
         ns_dict[ns].append(name_parts[-1])
+    print(f"THE NAMESPACE DICT {ns_dict}")
     return ns_dict
 
 
