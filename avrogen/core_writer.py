@@ -389,7 +389,7 @@ def write_schema_record(record, writer, use_logical_types):
     writer.write('''\nclass {name}Class(DictWrapper):'''.format(name=type_name))
 
     with writer.indent():
-        writer.write('\nRECORD_SCHEMA = get_schema_type("%s")' % record.namespace + '.' + record.name)
+        writer.write('\nRECORD_SCHEMA = get_schema_type("%s")' % (record.namespace + '.' + record.name))
 
         writer.write('\n\ndef __init__(self, inner_dict=None):')
         with writer.indent():
