@@ -71,18 +71,15 @@ def write_defaults(record, writer, my_full_name=None, use_logical_types=False, i
                                                    idx=i,
                                                    do_json=isinstance(default_type,
                                                    schema.RecordSchema)))
-                print(f'Is logical types schema: {f_name}\t{v}')
                 writer.write(f'\nself.{f_name} = {v}')
                 default_written = True
             elif isinstance(default_type, schema.RecordSchema):
                 my_full_name = my_full_name.split('.')[-1]
                 d = convert_default(idx=i, full_name=my_full_name, do_json=True)
-                print(f'Is record schema: {f_name}\t{field.name}\t{my_full_name}\t{d}')
                 writer.write(f'\nself.{f_name} = {field.name.capitalize()}Class({d})')
                 default_written = True
             elif isinstance(default_type, (schema.PrimitiveSchema, schema.EnumSchema, schema.FixedSchema)):
                 d = convert_default(full_name=my_full_name, idx=f_name, do_json=False)
-                print(f'Is other schema: {f_name}\t{d}')
                 writer.write(f'\nself.{f_name} = {d}')
                 default_written = True
 
@@ -373,7 +370,6 @@ def generate_namespace_modules(names, output_folder):
         if not ns in ns_dict:
             ns_dict[ns] = []
         ns_dict[ns].append(name_parts[-1])
-    print(f"THE NAMESPACE DICT {ns_dict}")
     return ns_dict
 
 
