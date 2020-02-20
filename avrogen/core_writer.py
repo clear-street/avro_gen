@@ -118,6 +118,7 @@ def write_defaults(record, writer, my_full_name=None, use_logical_types=False, i
     if not something_written:
         writer.write('\npass')
 
+
 def write_setters(record, writer, use_logical_types=False):
     writer.write('\nfield_names = [')
     for field in record.fields:
@@ -136,6 +137,7 @@ def write_setters(record, writer, use_logical_types=False):
         if keyword.iskeyword(field.name):
             f_name =  field.name + get_field_type_name(field.type, use_logical_types)
         writer.write(f'self.{f_name} = inner_dict.get("{f_name}")\n')
+
 
 def write_fields(record, writer, use_logical_types):
     """
