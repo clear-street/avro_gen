@@ -70,7 +70,8 @@ def generate_schema(schema_json, use_logical_types=False, custom_imports=None, a
         n = clean_fullname(field_schema.name)
         writer.write(f"\n'{n}': {n}Class,")
 
-    writer.write('\nIDENTIFIER_TO_CLASS = {')
+    writer.set_tab(0)
+    writer.write('\n\nIDENTIFIER_TO_CLASS = {')
     writer.tab()
 
     for name, field_schema in names:
