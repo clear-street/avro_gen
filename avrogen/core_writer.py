@@ -129,7 +129,7 @@ def write_setters(record, writer, use_logical_types=False):
     writer.write('    err = set(inner_dict.keys()) - set(field_names)\n')
     writer.write('    test_keys = []\n')
     writer.write('    for e in err:\n')
-    writer.write('        if inner_dict[e] is None:\n')
+    writer.write('        if inner_dict[e] is not None:\n')
     writer.write('            test_keys.append(e)\n')
     writer.write('    if test_keys:\n')
     writer.write('        raise KeyError(f"Keys from provided object are not subset of object params in {type(self).__name__}: {err}")\n')
